@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import Game from "./components/Game";
+import Timer from "./components/Timer";
+import resetBtn from "./assets/retry-btn.svg";
+import { useState } from "react";
 function App() {
+  const [reset, setReset] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <DndProvider backend={HTML5Backend}>
+      <header>
+        <Timer reset={reset} setReset={setReset} />
+        <img
+          onClick={(e) => setReset(true)}
+          class="reset-btn"
+          src={resetBtn}
+          alt="reset button"
+        ></img>
       </header>
-    </div>
+      <Game reset={reset} setReset={setReset} />
+    </DndProvider>
   );
 }
 

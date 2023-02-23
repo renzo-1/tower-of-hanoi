@@ -34,7 +34,7 @@ const Game = ({ play, setPlay, setMovesCount, discNum }) => {
       setPlay(false);
       setWin(true);
     }
-  }, [tower2, tower3]);
+  }, [tower2, tower3, discNum, setMovesCount, setPlay]);
 
   const [{ isOver1 }, dropRef1] = useDrop(() => ({
     accept: "disc",

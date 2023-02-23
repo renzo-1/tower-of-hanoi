@@ -1,21 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap");
-
+@font-face {
+  font-family: "Sergio Trendy";
+  src: url("./assets/Sergio-Trendy.ttf") format("ttf");
+}
 :root {
-  --bg-color: #dfba8e;
-  --acc-color: #4a2a02;
+  --bg-color: #dda15e;
+  --lighter-bg-color: #e9b273;
+  --acc-color: #bc6c25;
+  --red: #e63946;
 }
 * {
+  /* outline: 1px solid red; */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-#root {
+body {
   background-color: var(--bg-color);
   font-family: "poppins", sans-serif;
+  color: #f9f9f9;
   letter-spacing: 3px;
-  width: 100%;
-  min-height: 100vh;
   overflow: hidden;
+}
+#root {
+  position: relative;
+  max-width: 90%;
+  margin: 0 auto;
+
+  min-height: 100vh;
 
   display: flex;
   align-items: center;
@@ -23,34 +35,78 @@
 }
 header {
   width: 100%;
-  margin-top: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+
+  position: absolute;
+  top: 25px;
 }
 .reset-btn {
   height: min-content;
-  position: absolute;
-  right: 50px;
-  width: 50px;
-  stroke: white;
+  width: 40px;
   cursor: pointer;
+  transition: all 0.2s;
+}
+.reset-btn:hover {
+  transform: scale(0.9);
+}
+.moves {
+  height: min-content;
 }
 
-.timer {
-  width: 100px;
-  height: 75px;
-  display: grid;
-  place-items: center;
-
-  background-color: var(--acc-color);
-  color: #f9f9f9;
-  border-radius: 5px;
+.moves span {
+  color: var(--acc-color);
 }
-.game {
-  /* outline: 2px solid red; */
+
+.intro-bg {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  outline: 1px solid red;
+  z-index: 10;
+  background: var(--bg-color);
+
+  animation: fade-to-none 1s ease 1.5s forwards;
+}
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   width: 100%;
-  margin: auto 0;
+  margin: auto;
+
+  text-align: center;
+  font-size: 2.5rem;
+  font-family: "Sergio Trendy", sans-serif;
+  letter-spacing: 5px;
+  color: var(--acc-color);
+  z-index: 20;
+  animation: animate-title 2s ease 1.5s forwards;
+}
+
+@keyframes fade-to-none {
+  to {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@keyframes animate-title {
+  to {
+    top: 25%;
+    color: var(--lighter-bg-color);
+  }
+}
+
+.game {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -58,25 +114,127 @@ header {
 }
 
 .tower-container {
-  width: 150px;
-  height: 300px;
+  width: 145px;
+  height: 200px;
   display: grid;
   place-items: center;
 
   background-image: url("./assets/tower.svg");
   background-repeat: no-repeat;
   background-position: center;
-  /* background-size: 193px; */
   background-size: 173px;
 }
 
 .discs {
-  /* outline: 1px solid black; */
-  width: 150px;
+  width: 140px;
   height: 140px;
   display: flex;
   align-items: center;
   justify-content: end;
   flex-direction: column-reverse;
 }
+.disc {
+  box-shadow: inset 3px 0px 3.5px rgba(0, 0, 0, 0.5);
+  background-color: var(--acc-color);
+  height: 25px;
+  z-index: 5;
+}
 
+.win-container {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  outline: 1px solid red;
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.win-container h1 {
+  text-align: center;
+  color: var(--red);
+  font-size: 4rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-text-stroke: #f9f9f9 1px;
+  margin-bottom: 20px;
+}
+.win-container h3 {
+  font-weight: normal;
+  display: inline-block;
+  font-size: 0.8rem;
+}
+.win-container span {
+  color: var(--red);
+}
+.win-container img {
+  all: unset;
+  padding-top: 100px;
+  width: 50px;
+  cursor: pointer;
+}
+.win-container img:hover {
+  transform: scale(0.9);
+}
+
+.slider {
+  width: 300px;
+  position: absolute;
+  bottom: 200px;
+  text-align: center;
+}
+.slider h2 {
+  padding-bottom: 10px;
+}
+.slider span {
+  color: var(--acc-color);
+  font-size: 0.8rem;
+  text-align: center;
+}
+@media screen and (min-width: 700px) {
+  .tower-container {
+    background-size: 210px;
+    width: 230px;
+    height: 300px;
+  }
+  .discs {
+    height: 161px;
+  }
+
+  .moves {
+    left: 0;
+  }
+  .reset-btn {
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  h2 {
+    font-size: 2rem;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  #root {
+    max-width: 80%;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .tower-container {
+    background-size: 230px;
+    width: 230px;
+    height: 300px;
+    margin-left: 10px;
+  }
+  .discs {
+    height: 176px;
+    width: 200px;
+  }
+  #root {
+    max-width: 50%;
+  }
+}

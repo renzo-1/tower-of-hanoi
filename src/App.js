@@ -1,24 +1,34 @@
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Game from "./components/Game";
-import Timer from "./components/Timer";
-import resetBtn from "./assets/retry-btn.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import MovesCounter from "./components/MovesCounter";
+import DiscNums from "./components/DiscNums";
+import Retry from "./components/Retry";
+
 function App() {
-  const [reset, setReset] = useState(true);
+  const [play, setPlay] = useState(false);
+  const [movesCount, setMovesCount] = useState(0);
+  const [discNum, setDiscNum] = useState(3);
 
   return (
     <DndProvider backend={HTML5Backend}>
       <header>
-        <Timer reset={reset} setReset={setReset} />
-        <img
-          onClick={(e) => setReset(true)}
-          class="reset-btn"
-          src={resetBtn}
-          alt="reset button"
-        ></img>
+        <MovesCounter movesCount={movesCount} />
+        <Retry setPlay={setPlay} setMovesCount={setMovesCount} />
       </header>
-      <Game reset={reset} setReset={setReset} />
+
+      <h1 className="title">Tower of Hanoi</h1>
+      <div className="intro-bg"></div>
+
+      <Game
+        play={play}
+        movesCount={movesCount}
+        discNum={discNum}
+        setPlay={setPlay}
+        setMovesCount={setMovesCount}
+      />
+      <DiscNums setDiscNum={setDiscNum} />
     </DndProvider>
   );
 }

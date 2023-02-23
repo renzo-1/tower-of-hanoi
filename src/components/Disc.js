@@ -5,7 +5,7 @@ import { useMediaQuery } from "./MediaQueryHook";
 const Disc = ({ disc, i, discNum }) => {
   const isMatchMedia = useMediaQuery("(min-width: 1080px)");
 
-  const widthRate = 15;
+  const widthRate = 10;
   const [{ isDragging }, dragRef] = useDrag(() => ({
     type: "disc",
     item: disc,

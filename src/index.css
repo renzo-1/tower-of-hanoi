@@ -21,6 +21,7 @@ body {
   color: #f9f9f9;
   letter-spacing: 3px;
   overflow: hidden;
+  width: 100vw;
 }
 #root {
   position: relative;
@@ -67,7 +68,6 @@ header {
   outline: 1px solid red;
   z-index: 10;
   background: var(--bg-color);
-
   animation: fade-to-none 1s ease 1.5s forwards;
 }
 .title {
@@ -114,7 +114,7 @@ header {
 }
 
 .tower-container {
-  width: 145px;
+  width: 120px;
   height: 200px;
   display: grid;
   place-items: center;
@@ -122,12 +122,13 @@ header {
   background-image: url("./assets/tower.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 173px;
+  background-size: 130px;
 }
 
 .discs {
-  width: 140px;
-  height: 140px;
+  outline: 1px solid red;
+  width: 100px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -136,7 +137,7 @@ header {
 .disc {
   box-shadow: inset 3px 0px 3.5px rgba(0, 0, 0, 0.5);
   background-color: var(--acc-color);
-  height: 25px;
+  height: 15px;
   z-index: 5;
 }
 
@@ -193,6 +194,7 @@ header {
   font-size: 0.8rem;
   text-align: center;
 }
+
 @media screen and (min-width: 700px) {
   .tower-container {
     background-size: 210px;
@@ -201,6 +203,7 @@ header {
   }
   .discs {
     height: 161px;
+    width: 200px;
   }
 
   .moves {
@@ -233,6 +236,9 @@ header {
   .discs {
     height: 176px;
     width: 200px;
+  }
+  .disc {
+    height: 25px;
   }
   #root {
     max-width: 50%;

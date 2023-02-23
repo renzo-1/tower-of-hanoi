@@ -67,6 +67,8 @@ const Game = ({ play, setPlay, setMovesCount, discNum }) => {
   };
 
   const removeDisc = (disc) => {
+    setMovesCount((prev) => prev + 1);
+    setFinalMovesCount((prev) => prev + 1);
     if (disc.currTower === 1) {
       setTower1((prevDiscs) => popPrevDisc(prevDiscs));
     } else if (disc.currTower === 2) {
@@ -74,19 +76,16 @@ const Game = ({ play, setPlay, setMovesCount, discNum }) => {
     } else if (disc.currTower === 3) {
       setTower3((prevDiscs) => popPrevDisc(prevDiscs));
     }
-    setMovesCount((prev) => prev + 1);
-    setFinalMovesCount((prev) => prev + 1);
   };
 
   const addDiscToTower1 = (disc) => {
-    console.log(disc);
     // do no thing if the disc have not changed tower.
     if (disc.currTower === 1) return;
-    // removes disc from previous tower
     setTower1((prevDiscs) => {
       if (prevDiscs[prevDiscs.length - 1]?.disc > disc.disc) {
         return prevDiscs;
       } else {
+        // removes disc from previous tower
         removeDisc(disc);
         return [...prevDiscs, { ...disc, currTower: 1 }];
       }
@@ -94,7 +93,6 @@ const Game = ({ play, setPlay, setMovesCount, discNum }) => {
   };
 
   const addDiscToTower2 = (disc) => {
-    console.log(disc);
     if (disc.currTower === 2) return;
     setTower2((prevDiscs) => {
       if (prevDiscs[prevDiscs.length - 1]?.disc > disc.disc) {
@@ -107,7 +105,6 @@ const Game = ({ play, setPlay, setMovesCount, discNum }) => {
   };
 
   const addDiscToTower3 = (disc) => {
-    console.log(disc);
     if (disc.currTower === 3) return;
     setTower3((prevDiscs) => {
       if (prevDiscs[prevDiscs.length - 1]?.disc > disc.disc) {

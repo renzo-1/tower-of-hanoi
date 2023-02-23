@@ -23,6 +23,11 @@ body {
   width: 100vw;
   height: 100vh;
 }
+html {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
 #root {
   position: relative;
   max-width: 90%;

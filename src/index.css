@@ -10,7 +10,6 @@
   --red: #e63946;
 }
 * {
-  /* outline: 1px solid red; */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -22,6 +21,7 @@ body {
   letter-spacing: 3px;
   overflow: hidden;
   width: 100vw;
+  height: 100vh;
 }
 #root {
   position: relative;
@@ -65,7 +65,6 @@ header {
   height: 100vh;
   position: absolute;
   top: 0;
-  outline: 1px solid red;
   z-index: 10;
   background: var(--bg-color);
   animation: fade-to-none 1s ease 1.5s forwards;
@@ -126,18 +125,18 @@ header {
 }
 
 .discs {
-  outline: 1px solid red;
   width: 100px;
   height: 100px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   justify-content: end;
   flex-direction: column-reverse;
 }
 .disc {
   box-shadow: inset 3px 0px 3.5px rgba(0, 0, 0, 0.5);
   background-color: var(--acc-color);
-  height: 15px;
+  height: 20px;
   z-index: 5;
 }
 
@@ -146,7 +145,6 @@ header {
   width: 200%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  outline: 1px solid red;
   z-index: 10;
 
   display: flex;

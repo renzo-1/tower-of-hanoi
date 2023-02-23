@@ -5,7 +5,7 @@
 }
 :root {
   --bg-color: #dda15e;
-  --lighter-bg-color: #e9b273;
+  --lighter-bg-color: #e1ac70;
   --acc-color: #bc6c25;
   --red: #e63946;
 }
@@ -66,10 +66,11 @@ header {
 }
 
 .intro-bg {
-  width: 100%;
+  width: 150%;
   height: 100%;
   position: absolute;
   top: 0;
+  left: -20%;
   z-index: 10;
   background: var(--bg-color);
   animation: fade-to-none 1s ease 1.5s forwards;

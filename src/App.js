@@ -27,7 +27,7 @@ const HTML5toTouch = {
   ],
 };
 function App() {
-  const [play, setPlay] = useState(false);
+  const [isPlay, setIsPlay] = useState(false);
   const [movesCount, setMovesCount] = useState(0);
   const [discNum, setDiscNum] = useState(3);
 
@@ -35,17 +35,17 @@ function App() {
     <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <header>
         <MovesCounter movesCount={movesCount} />
-        <Retry setPlay={setPlay} setMovesCount={setMovesCount} />
+        <Retry setIsPlay={setIsPlay} setMovesCount={setMovesCount} />
       </header>
 
       <h1 className="title">Tower of Hanoi</h1>
       <div className="intro-bg"></div>
 
       <Game
-        play={play}
+        isPlay={isPlay}
         movesCount={movesCount}
         discNum={discNum}
-        setPlay={setPlay}
+        setIsPlay={setIsPlay}
         setMovesCount={setMovesCount}
       />
       <DiscNums setDiscNum={setDiscNum} />

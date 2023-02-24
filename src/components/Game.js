@@ -3,41 +3,41 @@ import Disc from "./Disc";
 import { useDrop } from "react-dnd";
 import DisplayWin from "./DisplayWin";
 
-const Game = ({ play, setPlay, setMovesCount, discNum }) => {
+const Game = ({ isPlay, setIsPlay, setMovesCount, movesCount, discNum }) => {
   const [tower1, setTower1] = useState([]);
   const [tower2, setTower2] = useState([]);
   const [tower3, setTower3] = useState([]);
-  const [win, setWin] = useState(false);
-  const [finalMovesCount, setFinalMovesCount] = useState(0);
-  // on start and reset, turn to initial state
+  const [isWin, setIsWin] = useState(false);
+
   useEffect(() => {
     const discs = [];
     for (let i = 0; i < discNum; i++) {
       discs.push({ disc: i, currTower: 1 });
     }
-    if (!play) {
+    // resets disc
+    if (!isPlay && !isWin) {
       setTower1(discs);
       setTower2([]);
       setTower3([]);
     }
-  }, [discNum, play]);
+  }, [discNum, isPlay, isWin]);
 
   useEffect(() => {
     // if a disc is placed to tower 2 or tower 3, the game will start.
     if (tower2.length > 0 || tower3.length > 0) {
-      setPlay(true);
-      setWin(false);
+      setIsPlay(true);
     }
-    // if win, stop play and display win
+    // if win, stop isPlay and display isWin
     if (tower3.filter((e, i) => e.disc === i).length === discNum) {
-      setMovesCount(0);
-      setPlay(false);
-      setWin(true);
+      setIsPlay(false);
+      setIsWin(true);
     }
   }, [tower2, tower3]);
 
+  // creates a droping references
   const [{ isOver1 }, dropRef1] = useDrop(() => ({
     accept: "disc",
+    // if dropped on this drop references, run the function
     drop: (disc) => addDiscToTower1(disc),
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -68,7 +68,6 @@ const Game = ({ play, setPlay, setMovesCount, discNum }) => {
 
   const removeDisc = (disc) => {
     setMovesCount((prev) => prev + 1);
-    setFinalMovesCount((prev) => prev + 1);
     if (disc.currTower === 1) {
       setTower1((prevDiscs) => popPrevDisc(prevDiscs));
     } else if (disc.currTower === 2) {
@@ -82,11 +81,13 @@ const Game = ({ play, setPlay, setMovesCount, discNum }) => {
     // do no thing if the disc have not changed tower.
     if (disc.currTower === 1) return;
     setTower1((prevDiscs) => {
+      // if the disc currently on top of the tower is shorter that the one being placed, don't accept the move
       if (prevDiscs[prevDiscs.length - 1]?.disc > disc.disc) {
         return prevDiscs;
       } else {
-        // removes disc from previous tower
+        // removes disc from its previous tower
         removeDisc(disc);
+        // inserts the new disc to this tower
         return [...prevDiscs, { ...disc, currTower: 1 }];
       }
     });
@@ -118,12 +119,12 @@ const Game = ({ play, setPlay, setMovesCount, discNum }) => {
 
   return (
     <>
-      {win && (
+      {isWin && (
         <DisplayWin
-          setWin={setWin}
+          setIsWin={setIsWin}
           setMovesCount={setMovesCount}
-          setPlay={setPlay}
-          finalMovesCount={finalMovesCount}
+          setIsPlay={setIsPlay}
+          movesCount={movesCount}
         />
       )}
       <div className="game">
